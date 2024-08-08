@@ -1,5 +1,5 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit'
-
+import { createSlice } from '@reduxjs/toolkit'
+import { nanoid } from '@reduxjs/toolkit'
 //initial state
 const initialState = {
     todos : [{ id: "abc", task:"demo-task", isDone: false}],
@@ -14,18 +14,16 @@ export const todoSlice = createSlice({
         //reduces
         addTodo:(state, action) => {
             const newTodo = {
-                 id:nanoid,
+                 id:nanoid(),
                  task:action.payload,
                  isDone:false
             };
+           // console.log(nanoid());
              state.todos.push(newTodo); //direct mutation of array
         },
-        deleteTodo:(state, action) => {
-            // action.payload
-            state.todos.filter((todo) => {
-             return  state.todos = todo.id !== action.payload;
-            });
-        },
+        deleteTodo: (state, action) => {
+            state.todos = state.todos.filter((todo) => todo.id !== action.payload);
+          },
         markAsDone:(state, action) => {
                //action.payload
                state.todos.map((todo)=>{
